@@ -48,6 +48,27 @@ PORT=8000 #or other if 8000 is busy
    ```
 5) Explore docs/UI in [http://0.0.0.0:8000/docs#](http://0.0.0.0:8000/docs#). The default api_key is `tars`. (needs to be changed in production)
 
+## Project structure (key files)
+```
+.
+├── Dockerfile               # Base image using uv + FastAPI
+├── Makefile                 # build/run/test/lint/typecheck/format targets
+├── docker-compose.yml       # Local run with mounts
+├── src/
+│   ├── app/
+│   │   ├── config/          # Hydra YAML configs (default.yaml)
+│   │   ├── model/           # recommender logic and schemas
+│   │   ├── utils/           # helpers (auth, art)
+│   │   └── main.py          # FastAPI entrypoint
+│   ├── art/                 # ASCII banner
+│   ├── connections/         # integrations placeholder
+│   └── settings.py          # Pydantic settings (env-driven)
+├── credentials/             # mounted secrets (gitignored except .gitkeep)
+├── tests/                   # pytest suite (100% coverage)
+├── .env.example             # env template (copy to .env)
+└── AGENTS.md                # repo guidelines
+```
+
 
 ## 🕵🏼‍♂️  ABOUT TESTING: 
     WE ARE SERIOUS PEOPLE AND WE TEST OUR CODE, WE AIM FOR 100% COVERAGE. SO DON'T BE WEAK AND FUCKING TEST!!
