@@ -1,0 +1,10 @@
+defaults:
+  - _self_
+
+app:
+  name: tars_recommender_service
+  environment: ${oc.env:ENV,local}
+
+action:
+  channel: web
+  message: "hello client"
