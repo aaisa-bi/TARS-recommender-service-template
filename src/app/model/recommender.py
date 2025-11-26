@@ -13,7 +13,9 @@ class DefaultRecommender(Recommender):
     def __init__(self, config_path: Path) -> None:
         config = self._load_config(config_path)
         container = OmegaConf.to_container(config, resolve=True)
-        self.config_data: Dict[str, Any] = container if isinstance(container, dict) else {}
+        self.config_data: Dict[str, Any] = (
+            container if isinstance(container, dict) else {}
+        )
 
     def _load_config(self, path: Path) -> DictConfig:
         if path.is_file():
@@ -29,10 +31,12 @@ class DefaultRecommender(Recommender):
         message = str(action_config.get("message", "hello client"))
         return channel, {"message": message}
 
-    def recommend(self, event: Event) -> ActionResponse:
+    def recommend(self, event: Event) -> list[ActionResponse]:
         # Placeholder for future business logic using event details.
         default_action_channel, default_action_metadata = self._get_action_defaults()
-        return ActionResponse(
-            action_channel=default_action_channel,
-            action_metadata=default_action_metadata,
-        )
+        return [
+            ActionResponse(
+                action_channel=default_action_channel,
+                action_metadata=default_action_metadata,
+            )
+        ]

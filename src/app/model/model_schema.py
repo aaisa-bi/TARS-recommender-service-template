@@ -19,8 +19,8 @@ class ActionResponse(BaseModel):
 
 class Recommender(ABC):
     @abstractmethod
-    def recommend(self, event: Event) -> ActionResponse:
+    def recommend(self, event: Event) -> list[ActionResponse]:
         """
-        Return a recommended action for the provided event.
+        Return recommended actions for the provided event.
         """
         raise NotImplementedError

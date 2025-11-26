@@ -68,10 +68,12 @@ def test_recommend_action_success(client: TestClient, api_key: str) -> None:
     )
 
     assert response.status_code == 200
-    assert response.json() == {
-        "action_channel": "web",
-        "action_metadata": {"message": "hello client"},
-    }
+    assert response.json() == [
+        {
+            "action_channel": "web",
+            "action_metadata": {"message": "hello client"},
+        }
+    ]
 
 
 def test_missing_api_key(client: TestClient) -> None:

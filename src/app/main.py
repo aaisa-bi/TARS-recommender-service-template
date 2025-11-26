@@ -16,6 +16,7 @@ CONFIG_PATH = Path(__file__).resolve().parent / "config" / "default.yaml"
 
 recommender = DefaultRecommender(CONFIG_PATH)
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     art = load_ascii_art()
@@ -33,10 +34,10 @@ app = FastAPI(
 
 @app.post(
     "/recommend-action",
-    response_model=ActionResponse,
+    response_model=list[ActionResponse],
     dependencies=[Depends(api_key_dependency)],
 )
-async def recommend_action(event: Event) -> ActionResponse:
+async def recommend_action(event: Event) -> list[ActionResponse]:
     logger.info(
         "Processing recommendation request for event_id={} env={}",
         event.id,

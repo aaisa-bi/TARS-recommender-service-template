@@ -13,15 +13,17 @@ def test_default_recommender_missing_config(tmp_path: Path) -> None:
 
     result = rec.recommend(event)
 
-    assert result == ActionResponse(
-        action_channel="web",
-        action_metadata={"message": "hello client"},
-    )
+    assert result == [
+        ActionResponse(
+            action_channel="web",
+            action_metadata={"message": "hello client"},
+        )
+    ]
 
 
 def test_recommender_base_not_implemented() -> None:
     class BadRecommender(Recommender):
-        def recommend(self, event: Event) -> ActionResponse:  # type: ignore[override]
+        def recommend(self, event: Event) -> list[ActionResponse]:  # type: ignore[override]
             return super().recommend(event)
 
     rec = BadRecommender()

@@ -10,6 +10,7 @@ venv/
 .ipynb_checkpoints/
 __cache__/
 *.log
+/.coverage
 /data/
 /tests/__pycache__/
 .idea/
